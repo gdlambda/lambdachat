@@ -28,7 +28,7 @@ const MarkdownComponents = {
     if (inline) {
       return (
         <code
-          className="bg-gray-200 text-gray-800 px-1 py-0.5 rounded text-xs font-mono"
+          className="bg-background text-muted-foreground px-1 py-0.5 rounded text-xs font-mono"
           {...otherProps}
         >
           {children}
@@ -37,7 +37,7 @@ const MarkdownComponents = {
     }
     return (
       <code
-        className="block bg-gray-800 text-gray-100 p-2 rounded text-xs font-mono overflow-x-auto mb-2"
+        className="block bg-background text-muted-foreground p-2 rounded text-xs font-mono overflow-x-auto mb-2"
         {...otherProps}
       >
         {children}
@@ -47,7 +47,7 @@ const MarkdownComponents = {
   // Pre blocks (for code blocks)
   pre: ({ ...props }) => (
     <pre
-      className="bg-gray-800 text-gray-100 p-2 rounded overflow-x-auto mb-2"
+      className="bg-background text-muted-foreground p-2 rounded overflow-x-auto mb-2"
       {...props}
     />
   ),
@@ -58,11 +58,13 @@ const MarkdownComponents = {
   ol: ({ ...props }) => (
     <ol className="list-decimal list-inside mb-2 space-y-1" {...props} />
   ),
-  li: ({ ...props }) => <li className="text-sm" {...props} />,
+  li: ({ ...props }) => (
+    <li className="text-sm text-muted-foreground" {...props} />
+  ),
   // Links
   a: ({ ...props }) => (
     <a
-      className="text-blue-600 hover:text-blue-800 underline"
+      className="text-primary hover:text-primary-foreground underline"
       target="_blank"
       rel="noopener noreferrer"
       {...props}
@@ -71,25 +73,25 @@ const MarkdownComponents = {
   // Blockquotes
   blockquote: ({ ...props }) => (
     <blockquote
-      className="border-l-4 border-gray-300 pl-3 italic text-gray-600 mb-2"
+      className="border-l-4 border-border pl-3 italic text-muted-foreground mb-2"
       {...props}
     />
   ),
   // Tables
   table: ({ ...props }) => (
     <div className="overflow-x-auto mb-2">
-      <table className="min-w-full border border-gray-300 text-xs" {...props} />
+      <table className="min-w-full border border-border text-xs" {...props} />
     </div>
   ),
-  thead: ({ ...props }) => <thead className="bg-gray-50" {...props} />,
+  thead: ({ ...props }) => <thead className="bg-background" {...props} />,
   th: ({ ...props }) => (
     <th
-      className="border border-gray-300 px-2 py-1 text-left font-medium"
+      className="border border-border px-2 py-1 text-left font-medium"
       {...props}
     />
   ),
   td: ({ ...props }) => (
-    <td className="border border-gray-300 px-2 py-1" {...props} />
+    <td className="border border-border px-2 py-1" {...props} />
   ),
   // Strong and emphasis
   strong: ({ ...props }) => <strong className="font-semibold" {...props} />,
@@ -121,13 +123,13 @@ export const MessageItem = ({ message, sender }: MessageItemProps) => {
         <div
           className={`rounded-lg p-3 shadow-sm ${
             isUser
-              ? "bg-blue-500 text-white"
-              : "bg-white border border-gray-200"
+              ? "bg-primary text-primary-foreground"
+              : "bg-background border border-border"
           }`}
         >
           <div
             className={`text-xs font-medium mb-2 flex items-center gap-2 ${
-              isUser ? "text-blue-100" : "text-gray-500"
+              isUser ? "text-primary-foreground" : "text-muted-foreground"
             }`}
           >
             {sender}
@@ -137,8 +139,8 @@ export const MessageItem = ({ message, sender }: MessageItemProps) => {
           <div
             className={`text-sm prose prose-sm max-w-none ${
               isUser
-                ? "text-white prose-invert prose-headings:text-white prose-p:text-white prose-strong:text-white prose-em:text-white prose-code:text-blue-100 prose-code:bg-blue-600"
-                : "text-gray-700"
+                ? "text-primary-foreground prose-invert prose-headings:text-primary-foreground prose-p:text-primary-foreground prose-strong:text-primary-foreground prose-em:text-primary-foreground prose-code:text-primary-foreground prose-code:bg-primary"
+                : "text-muted-foreground"
             }`}
           >
             {isUser ? (
