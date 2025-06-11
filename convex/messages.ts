@@ -18,6 +18,18 @@ export const createMessage = mutation({
   },
 });
 
+export const updateMessage = mutation({
+  args: {
+    messageId: v.id("messages"),
+    content: v.string(),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.messageId, {
+      content: args.content,
+    });
+  },
+});
+
 // Get all messages for a specific chat
 export const getMessagesByChat = query({
   args: { chatId: v.id("chats") },

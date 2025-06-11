@@ -4,7 +4,7 @@ import { streamText } from "ai";
 import { fetchQuery } from "convex/nextjs";
 
 export async function POST(request: Request) {
-  const { messages, chatId } = await request.json();
+  const { messages, chatId, model } = await request.json();
   const message = messages[messages.length - 1].content;
 
   const messagesQuery = await fetchQuery(api.messages.getMessagesByChat, {
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
   });
 
   const result = await streamText({
-    model: openRouter("deepseek/deepseek-r1-0528:free"),
+    model: openRouter(model),
     messages: messagesList,
   });
 

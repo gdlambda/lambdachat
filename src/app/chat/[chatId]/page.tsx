@@ -9,6 +9,7 @@ import {
 import { Separator } from "@/src/components/ui/separator";
 import { BreadcrumbTitle } from "@/src/components/sidebar/breadcrumb-title";
 import { SignedIn, UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "@/src/components/ui/theme-toggle";
 
 export default async function ChatPage({
   params,
@@ -23,11 +24,14 @@ export default async function ChatPage({
         <AppSidebar />
         <SidebarInset className="flex flex-col h-screen">
           {/* Fixed header at top */}
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-white z-10 sticky top-0">
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b z-10 sticky top-0">
             <div className="flex items-center gap-2 px-3">
               <SidebarTrigger />
               <Separator orientation="vertical" className="mr-2 h-4" />
               <BreadcrumbTitle chatId={chatId} />
+            </div>
+            <div className="flex items-center gap-2">
+              <ModeToggle />
             </div>
             <div className="ml-auto mr-4">
               <SignedIn>

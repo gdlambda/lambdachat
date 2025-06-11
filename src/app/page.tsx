@@ -26,15 +26,17 @@ import { Input } from "@/src/components/ui/input";
 import { redirect } from "next/navigation";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { useState } from "react";
 
 export default function Page() {
   const createChat = useMutation(api.chats.createChat);
+  const [open, setOpen] = useState(true);
 
   return (
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b z-10 sticky top-0">
           <div className="flex items-center gap-2 px-3">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -53,7 +55,7 @@ export default function Page() {
           </div>
         </header>
         {/* Dialog should trigger on load also has an input element for chat name */}
-        <Dialog open={true}>
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Create a new chat</DialogTitle>
@@ -65,7 +67,7 @@ export default function Page() {
               action={async (formData) => {
                 const name = formData.get("chatName");
                 const chatId = await createChat({ name: name as string });
-                redirect(`/chat/${chatId}`);
+                return redirect(`/chat/${chatId}`);
               }}
             >
               <Input
